@@ -6,9 +6,6 @@
 $arr = [];
 for ($i=1; $i<10000; $i++){
     $r = rand(0,5);
-    if (in_array($r, $arr)){
-        continue;
-    }
     $arr[]=$r;
     if (count($arr)>= 5)
         break;
