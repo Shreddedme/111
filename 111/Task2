@@ -1,0 +1,54 @@
+<?php
+
+class Pirate
+{
+    private bool $drunk = false;
+
+    public function isDrunk(): bool
+    {
+        return $this->drunk;
+    }
+
+    public function drink(): void
+    {
+        $this->drunk = true;
+    }
+}
+
+class BarrelOfRum
+{
+    private int $amount;
+
+    public function __construct(int $amount)
+    {
+        $this->amount = $amount;
+    }
+
+    public function giveRum(): bool
+    {
+        if ($this->amount <= 0) {
+            return false;
+        }
+        $this->amount--;
+
+        return true;
+    }
+
+}
+
+$barrelOfRum = new BarrelOfRum(5);
+
+$pirates = [];
+for($i = 1; $i <= 10; $i++) {
+    $pirates[] = new Pirate();
+}
+
+/** @var Pirate $pirate */
+foreach ($pirates as $pirate) {
+    if ($barrelOfRum->giveRum()) {
+        $pirate->drink();
+    }
+}
+
+var_dump($pirates);
+var_dump($barrelOfRum);
