@@ -1,0 +1,41 @@
+<?php
+
+'Напишите функцию на PHP, которая вычисляет, одинакового ли цвета две клетки шахматной доски. Возможная сигнатура: isSameColor('a1', 'c6'). Нужно учесть, что на вход могут подаваться некорректные данные.'
+
+function isSameColor(string $firstCell, string $secondCell)
+{
+    if (strlen($firstCell) !== 2 || strlen($secondCell) !== 2) {
+        return 'неверные данные';
+    }
+
+    $fistCellLetter = strtolower($firstCell[0]);
+    $fistCellDigit = intval($firstCell[1]);
+
+    $secondCellLetter = strtolower($secondCell[0]);
+    $secondCellDigit = intval($secondCell[1]);
+
+    if ($fistCellLetter < 'a' || $fistCellLetter > 'h' || $fistCellDigit < 1 || $fistCellDigit > 8 ||
+        $secondCellLetter < 'a' || $secondCellLetter > 'h' || $secondCellDigit < 1 || $secondCellDigit > 8) {
+        return 'неверные данные';
+    }
+
+        $chessBoardSquares = [
+        'a' => 1,
+        'b' => 2,
+        'c' => 3,
+        'd' => 4,
+        'e' => 5,
+        'f' => 6,
+        'g' => 7,
+        'h' => 8
+    ];
+
+    $firstCellValue = $chessBoardSquares[$fistCellLetter];
+    $secondCellValue = $chessBoardSquares[$secondCellLetter];
+
+    $sameColor = ($firstCellValue + $fistCellDigit) % 2 === ($secondCellValue + $secondCellDigit) % 2;
+
+    return ($sameColor === true) ? 'Одинакового цвета' : 'Разного цвета';
+}
+
+var_dump(isSameColor('a2', 'c6'));
