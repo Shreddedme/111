@@ -1,0 +1,60 @@
+<?php
+
+$counts = [
+    'user' => 2,
+    'group' => 4,
+];
+
+$input = [
+    'user',
+    'space',
+    'group',
+];
+
+/*****************
+ * Образец вывода
+ *****************
+ *
+ * [
+ *     {
+ *         "count": 2,
+ *         "items": [
+ *             "user",
+ *             "user"
+ *         ]
+ *     },
+ *     {
+ *         "count": 4,
+ *         "items": [
+ *             "group",
+ *             "group",
+ *             "group",
+ *             "group"
+ *         ]
+ *     }
+ * ]
+ *
+ */
+
+/*****************
+ * Решение
+ *****************/
+
+$result = [];
+
+foreach ($counts as $word => $count) {
+    foreach ($input as $key => $inputWord) {
+        if ($word === $inputWord) {
+            $resultItem['count'] = $count;
+            $resultItem['items'] = [];
+            for ($i = 1; $i <= $count; $i++) {
+                $resultItem['items'][] = $word;
+            }
+            $result[] = $resultItem;
+        }
+    }
+}
+
+echo json_encode($result);
+
+
